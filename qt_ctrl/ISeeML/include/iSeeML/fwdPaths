@@ -1,0 +1,13 @@
+// Main header for -*- C++ -*- classes 
+//  defining ISeeML' forward paths.
+
+#ifndef ISEEML_FWD_PATHS
+#define ISEEML_FWD_PATHS
+
+// To get the definition of iSeeML::rob::DubinsPath. 
+#include <iSeeML/rob/DubinsPath.hpp>
+// To get the definition of iSeeML::rob::FscPath. 
+#include <iSeeML/rob/FscPath.hpp>
+
+#endif
+

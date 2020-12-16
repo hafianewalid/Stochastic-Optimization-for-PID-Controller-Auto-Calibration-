@@ -1,0 +1,18 @@
+actions: []
+authors: Alexis Scheuer
+brief: ''
+bugtracker: ''
+depends:
+- nav_msgs
+- qt_build
+- catkin
+- roscpp
+description: "The ROS package qt_ctrl aims at proposing several controllers \n   \
+  \ for ROS with Qt GUI, in order to compare them."
+license: GPLv3
+maintainers: Alexis Scheuer <Alexis.Scheuer@loria.fr>
+msgs: []
+package_type: package
+repo_url: ''
+srvs: []
+url: ''

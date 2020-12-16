@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <name>qt_ctrl</name>
+  <version>0.2.1</version>
+  <description>
+    The ROS package qt_ctrl aims at proposing several controllers 
+    for ROS with Qt GUI, in order to compare them.
+  </description>
+  <maintainer email="Alexis.Scheuer@loria.fr">Alexis Scheuer</maintainer>
+  <author>Alexis Scheuer</author>
+  <license>GPLv3</license>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <build_depend>qt_build</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  
+  <run_depend>qt_build</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>nav_msgs</run_depend>
+ 
+</package>

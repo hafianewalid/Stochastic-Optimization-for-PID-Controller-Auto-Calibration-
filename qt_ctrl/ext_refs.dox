@@ -1,0 +1,221 @@
+//  For emacs: -*- C -*-
+
+/** @page refs References
+ **
+ ** This page sums up all the external objects used in this package.
+ ** It allows to avoid long links in the code: 
+ ** references to external documentation (with their long links) 
+ ** are gathered here, and are replaced by (short) ref commands
+ ** in the code.
+ **
+ **
+ ** @section refs_ros ROS
+ **
+ ** @subsection refs_ros_ros ROS Namespace
+ **
+ ** The @ref ROSnode "ROS node class" uses several functions of
+ ** the <a href=
+ ** "http://docs.ros.org/api/roscpp/html/namespaceros.html"
+ ** >ROS namespace</a>: <a href=
+ ** "http://docs.ros.org/api/roscpp/html/namespaceros.html#a7f5c939b8a0548ca9057392cc78d7ecb"
+ ** ><tt>init(int&, char**, const std::string&)</tt></a>, <a href=
+ ** "http://docs.ros.org/api/roscpp/html/namespaceros.html#a61a193529a9aad90ddace7724c7fc759"
+ ** ><tt>init(const M_string&, const std::string &)</tt></a>, <a href=
+ ** "http://docs.ros.org/api/roscpp/html/namespaceros.html#add7faea1768dbd48d3fe2970204c3422"
+ ** ><tt>start()</tt></a>, <a href=
+ ** "http://docs.ros.org/api/roscpp/html/namespaceros.html#a276d68870be2125b1cde229fee013e45"
+ ** ><tt>ok()</tt></a>, <a href=
+ ** "http://docs.ros.org/api/roscpp/html/namespaceros.html#af4afa6f0ad9f903f04a023982a95ff1c"
+ ** ><tt>spinOnce()</tt></a>, <a href= 
+ ** "http://docs.ros.org/api/roscpp/html/namespaceros.html#ad45cf503330c13a164e000ba0db1cae3"
+ ** ><tt>isStarted()</tt></a> , <a href=
+ ** "http://docs.ros.org/api/roscpp/html/namespaceros.html#a2d29113188d411e78f2c221aa7a7473e"
+ ** ><tt>shutdown()</tt></a>and <a href=
+ ** "http://docs.ros.org/api/roscpp/html/namespaceros.html#af068034d937093fdb0d5aaa1e0d9e249"
+ ** ><tt>waitForShutdown()</tt></a>.
+ **
+ ** @subsection refs_ros_console ROS::console
+ **
+ ** The 
+ ** <a href="http://docs.ros.org/api/rosconsole/html/console_8h.html"
+ ** ><tt>ros/console.h</tt></a> file offers several macros 
+ ** to generate logs at different <a href=
+ ** "http://docs.ros.org/api/rosconsole/html/namespaceros_1_1console_1_1levels.html"
+ ** >levels</a>.
+ ** The method ROSnode::log() uses the <a href=
+ ** "https://docs.ros.org/api/rosconsole/html/console_8h.html#af5c620bd5850fa5c886b4528de09e536"
+ ** ><tt>ROS_LOG_STREAM()</tt></a> macro.
+ **
+ ** @subsection refs_ros_publisher ROS::Publisher
+ **
+ ** The @ref ROSnode "ROS node class" of this package uses a <a href=
+ ** "http://docs.ros.org/indigo/api/roscpp/html/classros_1_1Publisher.html"
+ ** ><tt>ros::Publisher</tt></a> instance to send velocity commands
+ ** to the robot, with its <a href=
+ ** "http://docs.ros.org/indigo/api/roscpp/html/classros_1_1Publisher.html#a580af4f9f7ab80876036d8aa25dd27d5"
+ ** ><tt>publish()</tt></a> method.
+ ** This publisher is obtained with the <tt><a href=
+ ** "http://docs.ros.org/api/roscpp/html/classros_1_1NodeHandle.html"
+ ** >NodeHandle</a>::<a href=
+ ** "http://docs.ros.org/api/roscpp/html/classros_1_1NodeHandle.html#ae4711ef282892176ba145d02f8f45f8d"
+ ** >advertise(const std::string&, unsigned int32_t)</a></tt> method.
+ **
+ ** @subsection refs_ros_subscriber ROS::Subscriber
+ **
+ ** The @ref ROSnode "ROS node class" of this package uses a <a href=
+ ** "http://docs.ros.org/indigo/api/roscpp/html/classros_1_1Subscriber.html"
+ ** ><tt>ros::Subscriber</tt></a> instance to get odometry values.
+ ** This subscriber is obtained with the <tt><a href=
+ ** "http://docs.ros.org/api/roscpp/html/classros_1_1NodeHandle.html"
+ ** >NodeHandle</a>::<a href=
+ ** "http://docs.ros.org/api/roscpp/html/classros_1_1NodeHandle.html#aa0564e605cb9e0800bfd5d7e7702fab4"
+ ** >subscribe(const std::string&, unsigned int32_t, ...)</a></tt> method.
+ **
+ **
+ ** @subsection refs_ros_rate ROS::Rate
+ **
+ ** The method ROSnode::run() uses a <a href=
+ ** "http://docs.ros.org/api/rostime/html/classros_1_1Rate.html"
+ ** ><tt>ros::Rate</tt></a> instance to setup the frequency of its main 
+ ** loop with its <a href="http://docs.ros.org/api/rostime/html/classros_1_1Rate.html#ae5664d27cda1b17a103347560259e945"
+ ** ><tt>sleep()</tt></a> method.
+ **
+ ** @subsection refs_ros_time ROS::Time
+ **
+ ** The method ROSnode::log() uses the <tt><a href=
+ ** "http://docs.ros.org/api/rostime/html/classros_1_1Time.html"
+ ** >ros::Time</a>::<a href=
+ ** "http://docs.ros.org/api/rostime/html/classros_1_1Time.html#a4652034e29ceebf378d5930ff5914c0c"
+ ** >now()</a></tt> method to date logs in the @ref QtCtrlGUI "GUI".
+ **
+ ** A ros::Time is also used to date 
+ ** @ref refs_ros_odometry "the odometry data".
+ ** 
+ ** @subsection refs_ros_twist geometry_msgs::Twist
+ **
+ ** The method ROSnode::run() also uses a <a href=
+ **  "http://docs.ros.org/api/geometry_msgs/html/msg/Twist.html"
+ ** ><tt>geometry_msgs::Twist</tt></a> instance to publish (using 
+ ** its @ref ROSnode::cmd_publisher "command publisher") the desired
+ ** velocity to ROS.
+ **
+ ** @subsection refs_ros_odometry nav_msgs::Odometry
+ **
+ ** Odometry data are transmitted using a <a href=
+ **  "http://docs.ros.org/api/nav_msgs/html/msg/Odometry.html"
+ ** ><tt>nav_msgs::Odometry</tt></a> instance. 
+ ** A @ref ROSnode::odom_subscriber "ROS subscriver" is used 
+ ** to indicate which method should handle these data.
+ ** 
+ **
+ ** @section refs_qt Qt
+ **
+ ** @subsection refs_qt_application QApplication
+ **
+ ** The @ref main() "main function" uses a <a href=
+ ** "http://doc.qt.io/archives/qt-4.8/qapplication.html"><tt
+ ** >QApplication</tt></a> instance, whose main method is <a href=
+ ** "http://doc.qt.io/archives/qt-4.8/qapplication.html#exec"><tt
+ ** >exec()</tt></a>.
+ **
+ ** @subsection refs_qt_mainwindow QMainWindow
+ **
+ ** The @ref QtCtrlGUI "GUI" is a child of Qt class <a href=
+ ** "http://doc.qt.io/archives/qt-4.8/qmainwindow.html"><tt
+ ** >QMainWindow</tt></a>.  It is the container 
+ ** of the @ref TeleopWidget "teleoperation widget".
+ **
+ ** @subsection refs_qt_menubar QMenuBar
+ **
+ ** The @ref QtCtrlGUI "GUI" uses a <a href=
+ ** "http://doc.qt.io/archives/qt-4.8/qmenubar.html"><tt
+ ** >QMenuBar</tt></a> instance to hold main menus.
+ **
+ ** @subsection refs_qt_menu QMenu
+ **
+ ** The menu bar of the @ref QtCtrlGUI "GUI" uses <a href=
+ ** "http://doc.qt.io/archives/qt-4.8/qmenu.html"><tt
+ ** >QMenu</tt></a> instances.
+ **
+ ** @subsection refs_qt_toolbar QToolBar
+ **
+ ** The @ref QtCtrlGUI "GUI" uses a <a href=
+ ** "http://doc.qt.io/archives/qt-4.8/qtoolbar.html"><tt
+ ** >QToolBar</tt></a> instance to hold buttons.
+ **
+ ** @subsection refs_qt_action QAction
+ **
+ ** The @ref QtCtrlGUI "GUI" uses <a href=
+ ** "http://doc.qt.io/archives/qt-4.8/qaction.html"><tt
+ ** >QAction</tt></a> instances to define both buttons and menu items.
+ **
+ ** @subsection refs_qt_widget QWidget
+ **
+ ** The @ref TeleopWidget "teleoperation widget" is a child of Qt 
+ ** class <a href="http://doc.qt.io/archives/qt-4.8/qwidget.html"><tt
+ ** >QWidget</tt></a>.
+ **
+ ** @subsection refs_qt_thread QThread
+ **
+ ** The @ref ROSnode "ROS node class" is a child of Qt class <a href=
+ **  "http://doc.qt.io/archives/qt-4.8/qthread.html"><tt>QThread</tt
+ ** ></a>.
+ ** Its @ref ROSnode::run() "run() method" (i.e. the ROS control node) 
+ ** executes in a thread which is independant from the one handling 
+ ** the graphical interface (i.e. the main thread).
+ **
+ ** @subsection refs_qt_gui-thread GUI and multi-thread
+ **
+ ** Qt graphical objects are not thread-safe: if such an object 
+ ** is modified by a thread which is not the main one (which runs 
+ **  the graphical event loop), the programm may abort with 
+ ** segmentation violation.
+ **
+ ** The only secure way to get this modification is to emit a signal
+ ** in the thread which is not the main, the signal beeing caught 
+ ** by the main thread and connected to the method which handles 
+ ** the modification.
+ ** 
+ ** @subsection refs_qt_keyevent QKeyEvent
+ **
+ ** When a key of the keyboard is pressed, it generates a <a href=
+ **  "https://doc.qt.io/archives/qt-4.8/qkeyevent.html">key event</a>
+ ** whose <a href=
+ **  "https://doc.qt.io/archives/qt-4.8/qkeyevent.html#key">key()</a>
+ ** method gives the key number, according to <a href=
+ **  "https://doc.qt.io/archives/qt-4.8/qt.html#Key-enum">Qt table</a>.
+ **
+ ** @subsection refs_qt_stringlistmodel QStringListModel
+ **
+ ** The @ref ROSnode "ROS node class" uses a <a href=
+ **  "https://doc.qt.io/archives/qt-4.8/qstringlistmodel.html"><tt
+ ** >QStringListModel</tt></a> instance to display log messages 
+ ** in the @ref QtCtrlGUI "Qt GUI".
+ **
+ ** @subsection refs_qt_listview QListView
+ **
+ ** The @ref QtCtrlGUI "GUI" uses a <a href=
+ **  "https://doc.qt.io/archives/qt-4.8/qlistview.html"><tt
+ ** >QListView</tt></a> instance to display the log messages 
+ ** sent to ROS by the @ref ROSnode "ROS node".
+ **
+ ** @subsection refs_qt_signalmapper QSignalMapper
+ **
+ ** The Qt class <a href=
+ ** "http://doc.qt.io/archives/qt-4.8/qsignalmapper.html"><tt
+ ** >QSignalMapper</tt></a> allows to connect several buttons 
+ ** to a unique method, mapping each button to a parameter transmitted
+ ** to the method.
+ **
+ ** As <a href="http://doc.qt.io/qt-5">Qt 5</a> handles lambda 
+ ** functions, the <a href=
+ ** "http://doc.qt.io/archives/qt-4.8/qsignalmapper.html"><tt
+ ** >QSignalMapper</tt></a> class became obsolete.
+ ** However, <a href="http://ros.org">ROS</a> currently only works 
+ ** with <a href="http://doc.qt.io/archives/qt-4.8">Qt 4</a>, making
+ ** this class necessary.
+ **
+ **
+ ** @section refs_iseeml ISeeML
+ **
+ **/

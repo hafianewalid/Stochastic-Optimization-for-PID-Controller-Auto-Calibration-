@@ -1,0 +1,3 @@
+#!/bin/bash
+# Aliases do not work in shell script
+source $ROS_WS/devel/setup.bash; rosrun qt_ctrl gui

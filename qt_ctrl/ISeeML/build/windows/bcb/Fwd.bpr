@@ -1,0 +1,173 @@
+# ---------------------------------------------------------------------------
+# Old Borland C++ Builder (v. 4.04) project file, modified by A. Scheuer
+# (no verification yet, it may not work anymore, but it gives an idea
+#  of what should be done)
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# Section EDI
+# ---------------------------------------------------------------------------
+# La section suivante du Makefile du projet est gérée par l'EDI de BCB.-
+# Il est recommandé d'utiliser l'EDI pour modifier les valeurs de cette
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.04.04
+# ---------------------------------------------------------------------------
+PROJECT = 	FwdISeeML.exe
+BASEDIR =       ..\..\..
+OBJFILES = 	obj\basics.obj obj\geom.obj obj\rob\main.obj \
+		obj\rob\LinCurvPath.obj obj\rob\DubinsLikePath.obj \
+		obj\rob\DubinsPath.obj obj\rob\FscPath.obj Fwd.obj
+RESFILES =
+RESDEPEN = 	$(RESFILES)
+LIBFILES = 
+IDLFILES =
+IDLGENFILES =
+LIBRARIES = 
+SPARELIBS = 
+PACKAGES = 	VCL40.bpi VCLX40.bpi bcbsmp40.bpi QRPT40.bpi VCLDB40.bpi \
+		ibsmp40.bpi VCLDBX40.bpi TEEUI40.bpi TEEDB40.bpi TEE40.bpi \
+		nmfast40.bpi dclocx40.bpi
+DEFFILE =
+# ---------------------------------------------------------------------------
+PATHCPP = .;
+PATHASM = .;
+PATHPAS = .;
+PATHRC = .;
+DEBUGLIBPATH = 	 $(BCB)\lib\debug
+RELEASELIBPATH = $(BCB)\lib\release
+SYSDEFINES = 	 _NO_VCL
+USERDEFINES =
+# ---------------------------------------------------------------------------
+CFLAG1 = 	-I$(BCB)\include;$(BASEDIR)\include -O2 -w -Vms \
+		-Tkh30000 -ff -p -a8 -6 -k- -vi -c -tWM -tWC \
+		-D$(SYSDEFINES);$(USERDEFINES)
+IDLCFLAGS = 	-src_suffixcpp
+RFLAGS = 	-i$(BCB)\include;$(BASEDIR)\include
+LFLAGS = 	-L$(BCB)\lib;$(RELEASELIBPATH) -ap -Tpe -x -Gn -w
+# ---------------------------------------------------------------------------
+ALLOBJ = c0x32.obj $(OBJFILES)
+ALLRES = $(RESFILES)
+ALLLIB = $(LIBFILES)  import32.lib cw32mt.lib
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1036
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=Executable (Console)
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=2
+Item0=$(BCB)\include;(BASEDIR)\include
+Item1=$(BASEDIR)\include;$(BASEDIR)\src;$(BASEDIR)\src\rob;$(BCB)\include
+
+[HistoryLists\hlLibraryPath]
+Count=2
+Item0=$(BCB)\lib;.
+Item1=$(BASEDIR)\src;$(BASEDIR)\src\rob;$(BCB)\lib
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+InMemoryExe=0
+ShowInfoMsgs=0
+
+!endif
+
+# ---------------------------------------------------------------------------
+# SECTION MAKE
+# ---------------------------------------------------------------------------
+# Cette section du fichier projet n'est pas utilisée par l'EDI de BCB. Elle est destinéee
+# à la construction à partir de la ligne de commande en utilisant l'utilitaire MAKE.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+!if !$d(DCC32)
+DCC32 = dcc32
+!endif
+
+!if !$d(TASM32)
+TASM32 = tasm32
+!endif
+
+!if !$d(LINKER)
+LINKER = ilink32
+!endif
+
+!if !$d(BRCC32)
+BRCC32 = brcc32
+!endif
+
+!if !$d(IDL2CPP)
+IDL2CPP = idl2cpp
+!endif
+
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+!if $d(PATHRC)
+.PATH.RC  = $(PATHRC)
+!endif
+# ---------------------------------------------------------------------------
+$(PROJECT): $(IDLGENFILES) $(OBJFILES) $(RESDEPEN) $(DEFFILE)
+    $(BCB)\BIN\$(LINKER) @&&!
+    $(LFLAGS) +
+    $(ALLOBJ), +
+    $(PROJECT),, +
+    $(ALLLIB), +
+    $(DEFFILE), +
+    $(ALLRES)
+!
+# ---------------------------------------------------------------------------
+Fwd.obj:	$(BASEDIR)\use\Fwd.cpp
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) -n$(@D) {$< }
+
+obj\%.obj:	$(BASEDIR)\src\%.cpp
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) -n$(@D) {$< }
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

@@ -1,0 +1,131 @@
+# ---------------------------------------------------------------------------
+# Old Borland C++ Builder (v. 4.04) project file, modified by A. Scheuer
+# (no verification yet, it may not work anymore, but it gives an idea
+#  of what should be done)
+# ---------------------------------------------------------------------------
+!if !$d(BCB)
+BCB = $(MAKEDIR)\..
+!endif
+
+# ---------------------------------------------------------------------------
+# Section EDI
+# ---------------------------------------------------------------------------
+# La section suivante du Makefile du projet est gérée par l'EDI de BCB.
+# Il est recommandé d'utiliser l'EDI pour modifier les valeurs de cette
+# section.
+# ---------------------------------------------------------------------------
+
+VERSION = BCB.04.04
+# ---------------------------------------------------------------------------
+PROJECT = 	CompScpls.lib
+BASEDIR =       ..\..\..
+OBJFILES = 	CompScpls.obj obj\basics.obj obj\geom.obj obj\rob\main.obj \
+		obj\rob\LinCurvPath.obj obj\rob\DubinsLikePath.obj \
+		obj\rob\DubinsPath.obj obj\rob\FscPath.obj
+DEFFILE =
+LIBFILES =
+RESDEPEN = 	$(RESFILES)
+RESFILES =
+LIBRARIES =
+PACKAGES =
+# ---------------------------------------------------------------------------
+PATHCPP = 	.;$(BASEDIR)\src;$(BASEDIR)\src\rob
+PATHASM = 	.;
+PATHPAS = 	.;
+PATHRC = 	.;
+USERDEFINES =
+SYSDEFINES =NO_STRICT
+# ---------------------------------------------------------------------------
+CFLAG1 = 	-I$(BASEDIR)\src\rob;$(BASEDIR)\src;$(BCB)\include;$(BCB)\include\vcl;$(BASEDIR)\include \
+		-O2 -Hc -H=$(BCB)\lib\vcl40.csm -w -Vms -Ve -C -fp -ff \
+		-A -p -a8 -5 -k- -vi -c -b- -w-par -w-inl -Vx -tWM \
+		-D$(SYSDEFINES);$(USERDEFINES) 
+RFLAGS = 	-i$(BASEDIR)\src\rob;$(BASEDIR)\src;$(BCB)\include;$(BCB)\include\vcl;$(BASEDIR)\include
+LFLAGS = 	/C
+# ---------------------------------------------------------------------------
+ALLOBJ = 	$(OBJFILES)
+# ---------------------------------------------------------------------------
+!ifdef IDEOPTIONS
+
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1033
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=1
+Item0=$(BCB)\include;$(BCB)\include\vcl;$(BASEDIR)\include
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteDebug=0
+
+[Compiler]
+InMemoryExe=0
+ShowInfoMsgs=0
+
+!endif
+
+# ---------------------------------------------------------------------------
+# SECTION MAKE
+# ---------------------------------------------------------------------------
+# Cette section du fichier projet n'est pas utilisée par l'EDI de BCB. Elle est destinée
+# à la construction à partir de la ligne de commande en utilisant l'utilitaire MAKE.
+# ---------------------------------------------------------------------------
+
+.autodepend
+# ---------------------------------------------------------------------------
+!if !$d(BCC32)
+BCC32 = bcc32
+!endif
+
+# ---------------------------------------------------------------------------
+!if $d(PATHCPP)
+.PATH.CPP = $(PATHCPP)
+.PATH.C   = $(PATHCPP)
+!endif
+
+# ---------------------------------------------------------------------------
+$(PROJECT): $(OBJFILES) $(LIBFILES)
+    $(BCB)\BIN\$(LINKER) /u $@ @&&!
+    $(LFLAGS) $?
+!
+# ---------------------------------------------------------------------------
+obj\%.obj:	$(BASEDIR)\src\%.cpp
+    $(BCB)\BIN\$(BCC32) $(CFLAG1) -n$(@D) {$< }
+
+.rc.res:
+    $(BCB)\BIN\$(BRCC32) $(RFLAGS) -fo$@ $<
+# ---------------------------------------------------------------------------

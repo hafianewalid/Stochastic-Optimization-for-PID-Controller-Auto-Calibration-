@@ -1,0 +1,8 @@
+<!DOCTYPE RCC><RCC version="1.0"><!-- For emacs: -*- XML -*- -->
+    <qresource>
+        <file>files/icon.png</file>
+        <file>files/eject.svg</file>
+        <file>files/pause.svg</file>
+        <file>files/stop.svg</file>
+    </qresource>
+</RCC>

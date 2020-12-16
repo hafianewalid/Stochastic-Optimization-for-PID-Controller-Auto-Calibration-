@@ -1,0 +1,4 @@
+#!/bin/bash
+# Aliases do not work in shell script
+source $ROS_WS/devel/setup.bash; rosrun --prefix gdb qt_ctrl gui
+###ddd ../../devel/lib/qt_ctrl/gui
